@@ -97,7 +97,7 @@ tuple<Point, Point, double> closest_pair(Point* tx, Point* ty, Point* typ, int s
 	int* point2;
 
 
-	
+/*	
 	vector<Point> p_c;
 	p_c.reserve(n / 2);
 	for(int i = 0; i < n; i++)
@@ -105,6 +105,7 @@ tuple<Point, Point, double> closest_pair(Point* tx, Point* ty, Point* typ, int s
 			p_c.push_back(ty[i]);
 			//p_c.insert(ty[i], p_c.end());
 	
+
 	for(int i = 0; i < p_c.size(); i++){
 		for(int j = 1; j <= 7 and j+i < p_c.size(); j++){
 			temp_dist = dst(p_c.at(i), p_c.at(i+j));
@@ -114,10 +115,8 @@ tuple<Point, Point, double> closest_pair(Point* tx, Point* ty, Point* typ, int s
 			}
 		}
 	}
-//	*/
-	
-	
-/*	
+	*/
+
 	int k = 0;
 	for (int i = 0; i < n; i++)
 		if (in_range(ty[i], lane, min_dist)){
@@ -133,14 +132,12 @@ tuple<Point, Point, double> closest_pair(Point* tx, Point* ty, Point* typ, int s
 			}
 		}
 	}
-*/
-	
 	return point_pair;
 }
 
 int main() {
   	clock_t begin = clock();
-	//printf("start\n");
+	printf("start\n");
 	scanf("%d", &n);
 	Point * ax = new Point[n];
 	Point * ay = new Point[n];
@@ -154,11 +151,16 @@ int main() {
 		ay[i].x = x;
 		ay[i].y = y;
 	}
+	printf("read\n");
 	sort(ax, ax + n, cmp_x);
 	sort(ay, ay + n, cmp_y);
+	clock_t mid = clock();
+  	double m_time= double(mid- begin) / CLOCKS_PER_SEC;
+	printf("sorting time :: %f\n", m_time);
 
-	printpoints(ax, n);
-	printpoints(ay, n);
+
+	//printpoints(ax, n);
+	//printpoints(ay, n);
 
 	
 	//printf("calling\n");
@@ -173,20 +175,14 @@ int main() {
 	printf("%d %d\n%d %d", p1.x, p1.y, p2.x, p2.y); 
 	//printf("done4\n");
 	
-	
 	/*
-	for(int i = 0; i < n; ++i) {
-		delete[] ax[i];   
-		delete[] ay[i];   
-		//delete[] ay_prim[i];   
-	}
 	delete[] ax;
 	delete[] ay;
 	//delete[] ay_prim;   
 	*/
 	clock_t end = clock();
-	double t = double(end - begin) / CLOCKS_PER_SEC;
-	printf("time :: %f\n", t);
+  	double e_time= double(end - begin) / CLOCKS_PER_SEC;
+	printf("\nalg time :: %f\ntotal time :: %f\n",e_time - m_time, e_time);
 	return 0;
 }
 
